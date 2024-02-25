@@ -545,31 +545,40 @@ public class FrmProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableEspecialidadComponentHidden
 
     private void jtxtBuscarPorNombreProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarPorNombreProyectoKeyReleased
-        String nombre = jtxtBuscarPorNombreProyecto.getText().trim();
+        String textoBusqueda = jtxtBuscarPorNombreProyecto.getText().trim();
 
-        if (!nombre.isEmpty()) {
-            List<Proyecto> proyectos = proyectoLogic.buscarProyectoPorNombre(nombre);
-            modelo = (DefaultTableModel) jTableProyecto.getModel();
-            modelo.setRowCount(0);
-            Object[] ob = new Object[12];
-            for (int i = proyectos.size() - 1; i >= 0; i--) {
-                ob[0] = proyectos.get(i).getId();
-                ob[1] = proyectos.get(i).getTitulo();
-                ob[2] = proyectos.get(i).getAsesora();
-                ob[3] = proyectos.get(i).getJurado();
-                ob[4] = proyectos.get(i).getRes_designacion();
-                ob[5] = proyectos.get(i).getRes_ejecucion();
-                ob[6] = proyectos.get(i).getRes_cambioJurado();
-                ob[7] = proyectos.get(i).getRes_sustentacion();
-                ob[8] = proyectos.get(i).getRes_cambioTitulo();
-                ob[9] = proyectos.get(i).getEspecialidad().getNombre();
-                ob[10] = proyectos.get(i).getOtros();
-                ob[11] = proyectos.get(i).getEs_proyecto();
-                modelo.addRow(ob);
-            }
-        } else {
-            listarTablaProyecto();
-        }        // TODO add your handling code here:
+    if (!textoBusqueda.isEmpty()) {
+        List<Proyecto> proyectos = proyectoLogic.buscarProyectoPorNombre(textoBusqueda);
+
+        // Combina las listas sin duplicados
+  
+        proyectos = proyectos.stream().distinct().collect(Collectors.toList());
+
+        modelo = (DefaultTableModel) jTableProyecto.getModel();
+        modelo.setRowCount(0);
+        Object[] ob = new Object[15];
+        for (int i = proyectos.size() - 1; i >= 0; i--) {
+            ob[0] = proyectos.get(i).getId();
+            ob[1] = proyectos.get(i).getTitulo();
+            ob[2] = proyectos.get(i).getStudent1() != null ? proyectos.get(i).getStudent1().getNombre() : "N/A";
+            ob[3] = proyectos.get(i).getStudent2() != null ? proyectos.get(i).getStudent2().getNombre() : "N/A";
+            ob[4] = proyectos.get(i).getStudent3() != null ? proyectos.get(i).getStudent3().getNombre() : "N/A";
+
+            ob[5] = proyectos.get(i).getAsesora();
+            ob[6] = proyectos.get(i).getJurado();
+            ob[7] = proyectos.get(i).getRes_designacion();
+            ob[8] = proyectos.get(i).getRes_ejecucion();
+            ob[9] = proyectos.get(i).getRes_cambioJurado();
+            ob[10] = proyectos.get(i).getRes_sustentacion();
+            ob[11] = proyectos.get(i).getRes_cambioTitulo();
+            ob[12] = proyectos.get(i).getEspecialidad().getNombre();
+            ob[13] = proyectos.get(i).getOtros();
+            ob[14] = proyectos.get(i).getEs_proyecto();
+            modelo.addRow(ob);
+        }
+    } else {
+        listarTablaProyecto();
+    }  
     }//GEN-LAST:event_jtxtBuscarPorNombreProyectoKeyReleased
 
     private void jtxtBuscarPorAñoProyectoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtxtBuscarPorAñoProyectoKeyReleased
@@ -683,28 +692,32 @@ public class FrmProyecto extends javax.swing.JFrame {
     }
 
     public void listarTablaProyecto() {
-        List<Proyecto> proyectos = proyectoLogic.listaProyectos();
+       List<Proyecto> proyectos = proyectoLogic.listaProyectos();
         modelo = (DefaultTableModel) jTableProyecto.getModel();
         modelo.setRowCount(0);
-        Object[] ob = new Object[12];
+        Object[] ob = new Object[15];
         for (int i = proyectos.size() - 1; i >= 0; i--) {
             ob[0] = proyectos.get(i).getId();
             ob[1] = proyectos.get(i).getTitulo();
-            ob[2] = proyectos.get(i).getAsesora();
-            ob[3] = proyectos.get(i).getJurado();
-            ob[4] = proyectos.get(i).getRes_designacion();
-            ob[5] = proyectos.get(i).getRes_ejecucion();
-            ob[6] = proyectos.get(i).getRes_cambioJurado();
-            ob[7] = proyectos.get(i).getRes_sustentacion();
-            ob[8] = proyectos.get(i).getRes_cambioTitulo();
-            ob[9] = proyectos.get(i).getEspecialidad().getNombre();
-            ob[10] = proyectos.get(i).getOtros();
-            ob[11] = proyectos.get(i).getEs_proyecto();
+            ob[2] = proyectos.get(i).getStudent1() != null ? proyectos.get(i).getStudent1().getNombre() : "";
+            ob[3] = proyectos.get(i).getStudent2() != null ? proyectos.get(i).getStudent2().getNombre() : "";
+            ob[4] = proyectos.get(i).getStudent3() != null ? proyectos.get(i).getStudent3().getNombre() : "";
+            ob[5] = proyectos.get(i).getAsesora();
+            ob[6] = proyectos.get(i).getJurado();
+            ob[7] = proyectos.get(i).getRes_designacion();
+            ob[8] = proyectos.get(i).getRes_ejecucion();
+            ob[9] = proyectos.get(i).getRes_cambioJurado();
+            ob[10] = proyectos.get(i).getRes_sustentacion();
+            ob[11] = proyectos.get(i).getRes_cambioTitulo();
+            ob[12] = proyectos.get(i).getEspecialidad().getNombre();
+            ob[13] = proyectos.get(i).getOtros();
+            ob[14] = proyectos.get(i).getEs_proyecto();
             modelo.addRow(ob);
         }
         jTableProyecto.setModel(modelo);
         JTableHeader header = jTableProyecto.getTableHeader();
         header.setOpaque(false);
+
 
     }
 
