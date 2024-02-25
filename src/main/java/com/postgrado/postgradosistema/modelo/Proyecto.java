@@ -16,6 +16,9 @@ public class Proyecto {
     private String otros;
     private String es_proyecto;
     private Especialidad especialidad;
+    private Ingresante student1;
+    private Ingresante student2;
+    private Ingresante student3;
     private List<Ingresante> ingresantes = new ArrayList<>();
 
     public Proyecto() {
@@ -162,6 +165,32 @@ public class Proyecto {
         this.especialidad = especialidad;
     }
 
+    public Ingresante getStudent1() {
+        return student1;
+    }
+
+    public void setStudent1(Ingresante student1) {
+        this.student1 = student1;
+    }
+
+    public Ingresante getStudent2() {
+        return student2;
+    }
+
+    public void setStudent2(Ingresante student2) {
+        this.student2 = student2;
+    }
+
+    public Ingresante getStudent3() {
+        return student3;
+    }
+
+    public void setStudent3(Ingresante student3) {
+        this.student3 = student3;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "Proyecto{" +
